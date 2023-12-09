@@ -4,7 +4,7 @@ local default_config = {
     wpm = 230
 }
 
-local user_config = vim.g.wordcount_options or default_config
+local user_config = vim.g.readtime_options or default_config
 
 local function word_count()
     local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
@@ -18,12 +18,12 @@ local function read_time()
   return time
 end
 
-M.display_word_count = function()
+M.display_read_time = function()
     print(word_count() .. " words / " .. user_config.wpm .. " WPM = " .. read_time() .. " minutes of read time.")
 end
 
 M.setup = function()
-    vim.api.nvim_create_user_command('WordCount', M.display_word_count, {})
+    vim.api.nvim_create_user_command('ReadTime', M.display_read_time, {})
 end
 
 return M
