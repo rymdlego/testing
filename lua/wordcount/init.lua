@@ -1,3 +1,5 @@
+local M = {}
+
 local default_config = {
     wpm = 230
 }
@@ -19,3 +21,5 @@ end
 vim.api.nvim_create_user_command('WordCount', function()
     print(word_count() .. " words / " .. user_config.wpm .. " WPM = " .. read_time() .. " minutes.")
 end, {})
+
+return M
