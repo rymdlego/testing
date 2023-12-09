@@ -19,7 +19,7 @@ local function read_time()
 end
 
 M.display_word_count = function()
-    print(word_count() .. " words / " .. user_config.wpm .. " WPM = " .. read_time() .. " minutes.")
+    print(word_count() .. " words / " .. user_config.wpm .. " WPM = " .. read_time() .. " minutes of read time.")
 end
 
 M.setup = function()
