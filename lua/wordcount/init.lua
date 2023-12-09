@@ -1,14 +1,29 @@
 local M = {}
 
-M.word_count = function()
+local default_config = {
+    wpm = 230
+}
+
+local user_config = vim.g.wordcount_options or default_config
+
+local function word_count()
     local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
     local text = table.concat(lines, " ")
     local count = select(2, text:gsub("%S+", ""))
-    print("Word Count: " .. count)
+    return count
+end
+
+local function read_time()
+  local time = tostring(math.ceil(word_count() / user_config.wpm))
+  return time
+end
+
+M.display_word_count = function()
+    print(word_count() .. " words / " .. user_config.wpm .. " WPM = " .. read_time() .. " minutes.")
 end
 
 M.setup = function()
-    vim.api.nvim_create_user_command('WordCount', M.word_count, {})
+    vim.api.nvim_create_user_command('WordCount', M.display_word_count, {})
 end
 
 return M
